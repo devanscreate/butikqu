@@ -1,0 +1,229 @@
+---
+import { productsData, formatRupiah } from '../data/products';
+import { buildWhatsAppLink } from '../data/boutique';
+import ProductModal from './ProductModal.astro';
+
+const categories = [
+  { id: 'all', label: 'Semua Koleksi' },
+  { id: 'new-arrivals', label: 'New Arrivals' },
+  { id: 'formal', label: 'Formal & Party' },
+  { id: 'casual', label: 'Casual Chic' },
+  { id: 'modest', label: 'Modest Wear' },
+  { id: 'sale', label: 'Exclusive Sale' },
+];
+---
+
+<section id="katalog" class="py-16 md:py-24 bg-background">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Heading -->
+    <div class="text-center max-w-3xl mx-auto space-y-4 mb-12">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent/40 bg-accent/10 text-primary text-xs font-semibold tracking-widest uppercase">
+        <span>Katalog & Lookbook</span>
+      </div>
+      <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-primary">
+        Koleksi Busana Pilihan <span class="text-accent italic font-medium">butikqu</span>
+      </h2>
+      <p class="text-sm sm:text-base text-primary/70 leading-relaxed font-light">
+        Setiap karya diciptakan dengan pemilihan bahan premium, kenyamanan siluet, dan detail jahitan presisi untuk menyempurnakan penampilan Anda.
+      </p>
+    </div>
+
+    <!-- Category Filter Tabs -->
+    <div class="flex items-center justify-start sm:justify-center overflow-x-auto pb-4 mb-10 no-scrollbar gap-2 sm:gap-3">
+      {categories.map((cat, idx) => (
+        <button
+          type="button"
+          data-category-btn={cat.id}
+          class={`filter-btn whitespace-nowrap px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all border ${
+            idx === 0 
+              ? 'active-tab bg-primary text-background border-primary shadow-sm' 
+              : 'bg-background-card text-primary/70 border-primary/10 hover:border-accent hover:text-primary'
+          }`}
+        >
+          {cat.label}
+        </button>
+      ))}
+    </div>
+
+    <!-- Product Grid -->
+    <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {productsData.map((product) => {
+        const defaultWa = buildWhatsAppLink(
+          product.name,
+          product.colors[0] || 'Standar',
+          product.sizes[0] || 'Standard'
+        );
+
+        return (
+          <article 
+            data-category={product.category}
+            class="product-card group flex flex-col rounded-2xl overflow-hidden bg-background-card border border-primary/10 hover:border-accent/60 transition-all duration-300 shadow-soft hover:shadow-card"
+          >
+            <!-- Image & Badge Container -->
+            <div class="relative aspect-[4/5] overflow-hidden bg-primary/5">
+              <img 
+                src={product.image} 
+                alt={product.name} 
+                loading="lazy" 
+                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+              />
+              
+              <!-- Badges -->
+              <div class="absolute top-3.5 left-3.5 flex flex-col gap-1.5 items-start">
+                {product.badge && (
+                  <span class="px-2.5 py-1 rounded bg-primary text-background text-[11px] font-semibold tracking-wider uppercase shadow-sm">
+                    {product.badge}
+                  </span>
+                )}
+                {product.originalPrice && (
+                  <span class="px-2.5 py-1 rounded bg-accent text-primary text-[11px] font-bold tracking-wider uppercase shadow-sm">
+                    Sale
+                  </span>
+                )}
+              </div>
+
+              <!-- Quick View Overlay on Hover -->
+              <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-4">
+                <button
+                  type="button"
+                  data-product-json={JSON.stringify(product)}
+                  class="quick-view-btn transform translate-y-2 group-hover:translate-y-0 transition-transform px-5 py-2.5 rounded-full bg-background/95 backdrop-blur-sm text-primary hover:text-accent text-xs font-semibold tracking-wider uppercase shadow-md"
+                >
+                  Lihat Detail & Size Chart
+                </button>
+              </div>
+            </div>
+
+            <!-- Card Info -->
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between text-xs text-primary/60">
+                  <span class="uppercase tracking-widest font-medium text-accent">{product.categoryLabel}</span>
+                  <span class="text-[11px] text-primary/50">Ready Stock</span>
+                </div>
+
+                <h3 class="font-serif text-xl font-medium text-primary line-clamp-1 group-hover:text-accent transition-colors">
+                  {product.name}
+                </h3>
+
+                <!-- Karakteristik Bahan -->
+                <p class="text-xs text-primary/70 line-clamp-2 leading-relaxed bg-background-subtle p-2.5 rounded-lg border border-primary/5">
+                  <span class="font-medium text-primary">Bahan:</span> {product.fabric}
+                </p>
+
+                <!-- Available Sizes -->
+                <div class="flex items-center gap-1.5 pt-1">
+                  <span class="text-[11px] text-primary/50 mr-1">Ukuran:</span>
+                  {product.sizes.map((s) => (
+                    <span class="text-[10px] font-medium px-2 py-0.5 rounded border border-primary/10 bg-background text-primary/80">
+                      {s}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <!-- Price & CTA Actions -->
+              <div class="pt-3 border-t border-primary/10 space-y-3">
+                <div class="flex items-baseline justify-between">
+                  <div class="flex items-baseline gap-2">
+                    <span class="text-lg font-bold text-primary font-sans">
+                      {formatRupiah(product.price)}
+                    </span>
+                    {product.originalPrice && (
+                      <span class="text-xs text-primary/40 line-through">
+                        {formatRupiah(product.originalPrice)}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2 pt-1">
+                  <!-- Detail & Size Chart Modal Button -->
+                  <button
+                    type="button"
+                    data-product-json={JSON.stringify(product)}
+                    class="quick-view-btn w-full inline-flex items-center justify-center px-3 py-2.5 rounded-lg border border-primary/20 hover:border-accent text-primary hover:text-accent text-xs font-semibold tracking-wider transition-all"
+                  >
+                    Size Chart
+                  </button>
+
+                  <!-- Direct WhatsApp Button -->
+                  <a
+                    href={defaultWa}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg bg-primary text-background hover:bg-primary-hover border border-accent/40 text-xs font-semibold tracking-wider transition-all shadow-sm"
+                  >
+                    <svg class="w-3.5 h-3.5 text-whatsapp" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.303-.058.116-.087.188-.173.289l-.26.302c-.087.087-.179.182-.077.357.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.073.043.419-.101.824z"/>
+                    </svg>
+                    <span>Pesan WA</span>
+                  </a>
+                </div>
+
+              </div>
+
+            </div>
+          </article>
+        );
+      })}
+    </div>
+
+  </div>
+
+  <ProductModal />
+</section>
+
+<script>
+  const filterButtons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const productCards = document.querySelectorAll<HTMLElement>('.product-card');
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetCategory = btn.getAttribute('data-category-btn');
+
+      filterButtons.forEach(b => {
+        b.classList.remove('active-tab', 'bg-primary', 'text-background', 'border-primary', 'shadow-sm');
+        b.classList.add('bg-background-card', 'text-primary/70', 'border-primary/10');
+      });
+
+      btn.classList.add('active-tab', 'bg-primary', 'text-background', 'border-primary', 'shadow-sm');
+      btn.classList.remove('bg-background-card', 'text-primary/70', 'border-primary/10');
+
+      productCards.forEach(card => {
+        const itemCat = card.getAttribute('data-category');
+        if (targetCategory === 'all' || itemCat === targetCategory) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+
+  const modalButtons = document.querySelectorAll<HTMLButtonElement>('.quick-view-btn');
+  modalButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const dataStr = btn.getAttribute('data-product-json');
+      if (dataStr) {
+        try {
+          const product = JSON.parse(dataStr);
+          window.dispatchEvent(new CustomEvent('open-product-modal', { detail: product }));
+        } catch (e) {
+          console.error('Error parsing product data', e);
+        }
+      }
+    });
+  });
+</script>
+
+<style>
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>

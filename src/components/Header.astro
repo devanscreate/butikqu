@@ -1,0 +1,124 @@
+---
+import { boutiqueConfig, buildWhatsAppLink } from '../data/boutique';
+const waLink = buildWhatsAppLink();
+---
+
+<!-- Top Announcement Bar -->
+<div class="bg-primary text-background-subtle py-2 px-4 text-xs tracking-wider uppercase text-center border-b border-primary/20">
+  <div class="max-w-7xl mx-auto flex items-center justify-center gap-2">
+    <span class="inline-block w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
+    <span>Butik Offline Senopati Buka Setiap Hari (10:00 - 21:00 WIB) &bull; Pengiriman Seluruh Indonesia</span>
+  </div>
+</div>
+
+<!-- Main Navigation Header -->
+<header class="sticky top-0 z-40 bg-background/95 backdrop-blur-md border-b border-primary/10 transition-all">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="group flex items-baseline gap-1 focus:outline-none">
+        <span class="font-serif text-3xl sm:text-4xl font-semibold tracking-tight text-primary transition-colors group-hover:text-accent">
+          {boutiqueConfig.name}
+        </span>
+        <span class="w-2 h-2 rounded-full bg-accent inline-block"></span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-primary/80">
+        <a href="#katalog" class="hover:text-primary transition-colors py-1 border-b-2 border-transparent hover:border-accent">
+          Koleksi & Lookbook
+        </a>
+        <a href="#keunggulan" class="hover:text-primary transition-colors py-1 border-b-2 border-transparent hover:border-accent">
+          Kualitas Bahan
+        </a>
+        <a href="#cerita" class="hover:text-primary transition-colors py-1 border-b-2 border-transparent hover:border-accent">
+          Tentang Kami
+        </a>
+        <a href="#lokasi" class="hover:text-primary transition-colors py-1 border-b-2 border-transparent hover:border-accent">
+          Lokasi Butik
+        </a>
+      </nav>
+
+      <!-- Right Action CTA -->
+      <div class="hidden sm:flex items-center gap-4">
+        <a 
+          href={waLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-primary text-background hover:bg-primary-hover border border-accent/40 text-xs font-semibold tracking-wider uppercase transition-all shadow-sm hover:shadow-md"
+        >
+          <!-- WhatsApp Icon -->
+          <svg class="w-4 h-4 text-whatsapp" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.303-.058.116-.087.188-.173.289l-.26.302c-.087.087-.179.182-.077.357.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.073.043.419-.101.824z"/>
+          </svg>
+          <span>Chat Admin</span>
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <div class="flex items-center sm:hidden">
+        <button 
+          id="mobile-menu-btn"
+          type="button" 
+          class="p-2 text-primary hover:text-accent focus:outline-none"
+          aria-label="Toggle navigation menu"
+        >
+          <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown Nav -->
+  <div id="mobile-menu" class="hidden sm:hidden border-t border-primary/10 bg-background px-4 pt-3 pb-6 space-y-3">
+    <a href="#katalog" class="block py-2 text-base font-medium text-primary hover:text-accent border-b border-primary/5">
+      Koleksi & Lookbook
+    </a>
+    <a href="#keunggulan" class="block py-2 text-base font-medium text-primary hover:text-accent border-b border-primary/5">
+      Kualitas Bahan
+    </a>
+    <a href="#cerita" class="block py-2 text-base font-medium text-primary hover:text-accent border-b border-primary/5">
+      Tentang Kami
+    </a>
+    <a href="#lokasi" class="block py-2 text-base font-medium text-primary hover:text-accent border-b border-primary/5">
+      Lokasi Butik
+    </a>
+    <div class="pt-2">
+      <a 
+        href={waLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="w-full flex items-center justify-center gap-2 py-3 rounded-full bg-primary text-background font-semibold text-sm"
+      >
+        <svg class="w-4 h-4 text-whatsapp" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.303-.058.116-.087.188-.173.289l-.26.302c-.087.087-.179.182-.077.357.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.073.043.419-.101.824z"/>
+        </svg>
+        <span>Chat Admin WhatsApp</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+
+  if (btn && menu) {
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+
+    // Close menu when clicking nav item
+    const links = menu.querySelectorAll('a');
+    links.forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.add('hidden');
+      });
+    });
+  }
+</script>
+

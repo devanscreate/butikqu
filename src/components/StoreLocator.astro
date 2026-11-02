@@ -1,0 +1,138 @@
+---
+import { boutiqueConfig, buildWhatsAppLink } from '../data/boutique';
+const waFittingLink = `https://wa.me/${boutiqueConfig.whatsappNumber}?text=${encodeURIComponent('Halo Admin butikqu, saya ingin reservasi waktu kunjungan fitting room privat di butik Senopati.')}`;
+---
+
+<section id="lokasi" class="py-16 md:py-24 bg-background border-t border-primary/10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent/40 bg-accent/10 text-primary text-xs font-semibold tracking-widest uppercase">
+        <span>Kunjungi Butik Fisik</span>
+      </div>
+      <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-primary">
+        Atelier & Butik <span class="text-accent italic font-medium">Senopati</span>
+      </h2>
+      <p class="text-sm sm:text-base text-primary/70 leading-relaxed font-light">
+        Rasakan langsung kelembutan material kain, coba busana impian di ruang fitting privat, dan nikmati layanan personal styling kami.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
+      
+      <!-- Left Card: Store Details & Operational Info -->
+      <div class="lg:col-span-5 flex flex-col justify-between bg-background-card p-6 sm:p-8 rounded-2xl border border-primary/10 shadow-soft">
+        
+        <div class="space-y-6">
+          <!-- Alamat -->
+          <div class="space-y-2">
+            <span class="text-xs uppercase tracking-widest font-semibold text-accent flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+              Alamat Lengkap
+            </span>
+            <p class="font-serif text-xl font-medium text-primary">
+              {boutiqueConfig.address.street}
+            </p>
+            <p class="text-xs sm:text-sm text-primary/70">
+              {boutiqueConfig.address.city}, {boutiqueConfig.address.province} {boutiqueConfig.address.postalCode}
+            </p>
+            <p class="text-xs text-primary/60 italic bg-background-subtle p-2.5 rounded-lg border border-primary/5">
+              Patokan: {boutiqueConfig.address.landmark}
+            </p>
+          </div>
+
+          <!-- Jam Operasional -->
+          <div class="space-y-2 pt-4 border-t border-primary/10">
+            <span class="text-xs uppercase tracking-widest font-semibold text-accent flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              Jam Operasional
+            </span>
+            <p class="font-serif text-lg font-medium text-primary">
+              {boutiqueConfig.hours.days}
+            </p>
+            <p class="text-sm font-semibold text-accent">
+              {boutiqueConfig.hours.time}
+            </p>
+            <p class="text-xs text-primary/60 leading-relaxed">
+              {boutiqueConfig.hours.note}
+            </p>
+          </div>
+
+          <!-- Fasilitas Butik -->
+          <div class="space-y-2 pt-4 border-t border-primary/10">
+            <span class="text-xs uppercase tracking-widest font-semibold text-accent">Fasilitas Butik</span>
+            <div class="grid grid-cols-2 gap-2 text-xs text-primary/80">
+              <div class="flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+                <span>Fitting Room VIP Ber-AC</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+                <span>Area Parkir Valet Luas</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+                <span>Personal Stylist</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+                <span>Welcome Tea & Lounge</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="pt-6 border-t border-primary/10 mt-6 space-y-3">
+          <a 
+            href={boutiqueConfig.maps.directLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-full inline-flex items-center justify-center gap-2 py-3 px-6 rounded-full bg-primary text-background hover:bg-primary-hover border border-accent/40 font-semibold text-xs tracking-wider uppercase transition-all shadow-sm"
+          >
+            <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+            </svg>
+            <span>Buka Petunjuk Arah (Google Maps)</span>
+          </a>
+
+          <a 
+            href={waFittingLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-full inline-flex items-center justify-center gap-2 py-3 px-6 rounded-full bg-background-subtle border border-primary/20 hover:border-accent text-primary hover:text-accent font-semibold text-xs tracking-wider uppercase transition-all"
+          >
+            <svg class="w-4 h-4 text-whatsapp" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.303-.058.116-.087.188-.173.289l-.26.302c-.087.087-.179.182-.077.357.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.073.043.419-.101.824z"/>
+            </svg>
+            <span>Reservasi Fitting Room Privat</span>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Interactive Google Maps Embed -->
+      <div class="lg:col-span-7 rounded-2xl overflow-hidden border border-primary/10 shadow-card min-h-[380px] lg:min-h-full bg-primary/5 relative">
+        <iframe
+          src={boutiqueConfig.maps.embedUrl}
+          width="100%"
+          height="100%"
+          style="border:0; min-height: 420px;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Lokasi butik fisik butikqu Senopati"
+          class="w-full h-full"
+        ></iframe>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
